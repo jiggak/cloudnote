@@ -1,18 +1,18 @@
 var WebDAVRoot = "/webdav/";
 
-var Document = function(response) {
-  var filePath = $(response).find("href").text();
-  var fileName = filePath.split("/").pop();
-  var name = unescape(fileName.replace(".md", ""));
-  var etag = $(response).find("getetag").text();
-
-  return {
-    name: name,
-    filePath: filePath,
-    fileName: fileName,
-    etag: etag
-  }
+function Document (response) {
+  this.filePath = $(response).find("href").text();
+  this.fileName = this.filePath.split("/").pop();
+  this.name = unescape(this.fileName.replace(".md", ""));
+  this.etag = $(response).find("getetag").text();
 }
+
+Document.prototype.load = function() {
+  jQuery.ajax(this.filePath, {
+    success: app.onLoadDoc,
+    error: app.onError
+  });
+};
 
 var app = {
   docs: [],       // array of document objects in root
@@ -59,7 +59,7 @@ var app = {
       if (index == 0) {
         app.rootEtag = $(value).find("getetag").text();
       } else {
-        app.docs.push(Document(value));
+        app.docs.push(new Document(value));
       }
     });
 
@@ -117,17 +117,13 @@ $().ready(function() {
     }
 
     var fileName = location.hash.substring(1);
-    var filePath = WebDAVRoot + fileName;
-    jQuery.ajax(filePath, {
-      success: app.onLoadDoc,
-      error: app.onError
-    });
-
-    $("#docslist .active").removeClass("active");
-
     var doc = app.findDocWithFileName(fileName);
-    var index = app.docs.indexOf(doc);
-    $("#docslist > li:eq("+index+")").addClass("active");
+
+    doc.load(); // load document asyncronosly
+
+    // update selected item in documents list
+    $("#docslist .active").removeClass("active");
+    $("#docslist > li:eq("+app.docs.indexOf(doc)+")").addClass("active");
   });
 
   app.load();
