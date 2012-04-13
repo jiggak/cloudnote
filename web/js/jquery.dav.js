@@ -285,7 +285,7 @@
          * @href    http://greenbytes.de/tech/webdav/rfc3253.html#METHOD_REPORT
          * @href    http://greenbytes.de/tech/webdav/rfc3744.html#rfc.section.9.1
          */
-        this.report = function(dav) {
+        this.report = function(cob) {
           this.prepare(cob, 'REPORT');
           return this.send(cob);
         };
