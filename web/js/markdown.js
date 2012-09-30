@@ -572,13 +572,14 @@ Markdown.dialects.Gruber = {
                 // where Md.pl goes nuts. If the indent matches a level in the
                 // stack, put it there, else put it one deeper then the
                 // wanted_depth deserves.
-                var found = stack.some(function(s, i) {
-                  if ( s.indent != m[1] ) return false;
-                  list = s.list;     // Found the level we want
-                  stack.splice(i+1); // Remove the others
-                  //print("found");
-                  return true;       // And stop looping
-                });
+                var found = false;
+                for (i = 0; i < stack.length; i++) {
+                  if ( stack[ i ].indent != m[1] ) continue;
+                  list = stack[ i ].list;
+                  stack.splice( i+1 );
+                  found = true;
+                  break;
+                }
 
                 if (!found) {
                   //print("not found. l:", uneval(l));
@@ -1090,7 +1091,7 @@ Markdown.DialectHelpers.inline_until_char = function( text, want ) {
       return null;
     }
 
-    res = this.dialect.inline.__oneElement__.call(this, text.substr( consumed ) );
+    var res = this.dialect.inline.__oneElement__.call(this, text.substr( consumed ) );
     consumed += res[ 0 ];
     // Add any returned nodes.
     nodes.push.apply( nodes, res.slice( 1 ) );
