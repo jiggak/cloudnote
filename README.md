@@ -54,3 +54,4 @@ Projects used in this software:
 * [jquery.ba-hashchange.js](https://github.com/cowboy/jquery-hashchange)
 * [jquery.jqtemplate.js](http://www.slashdev.ca/jqtemplate/)
 * [markdown.js](https://github.com/evilstreak/markdown-js)
+* [jquery.cookie.js](https://github.com/carhartl/jquery-cookie)

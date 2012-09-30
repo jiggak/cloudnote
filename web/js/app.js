@@ -8,8 +8,11 @@ function Document (response) {
 }
 
 Document.prototype.load = function() {
-  jQuery.ajax(this.filePath, {
-    success: app.onLoadDoc,
+  var self = this;
+  jQuery.ajax(self.filePath, {
+    success: function (data, status, request) {
+      app.onLoadDoc(data, self);
+    },
     error: app.onError
   });
 };
@@ -34,8 +37,15 @@ var app = {
     console.log("request error");
   },
 
-  onLoadDoc: function(data, status, request) {
+  onLoadDoc: function(data, doc) {
     $("#docview").html(markdown.toHTML(data));
+
+    // update selected item in documents list
+    $("#docslist .active").removeClass("active");
+    $("#docslist > li:eq("+app.docs.indexOf(doc)+")").addClass("active");
+
+    // set page title
+    $("head > title").text(doc.name);
 
     // search for document links and convert to hash(#) links
     $("#docview a").each(function () {
@@ -45,7 +55,6 @@ var app = {
         // open absolute links in new tab/window
         $(this).attr("target", "_blank");
       } else {
-        var doc = app.findDocWithFileName(link);
         if (doc != null) {
           $(this).attr("href", "#" + link);
         }
@@ -119,12 +128,15 @@ $().ready(function() {
     var fileName = location.hash.substring(1);
     var doc = app.findDocWithFileName(fileName);
 
-    doc.load(); // load document asyncronosly
+    $.cookie("lastfile", fileName, { expires: 30 });
 
-    // update selected item in documents list
-    $("#docslist .active").removeClass("active");
-    $("#docslist > li:eq("+app.docs.indexOf(doc)+")").addClass("active");
+    doc.load(); // load document asyncronosly
   });
+
+  var lastFile = $.cookie("lastfile");
+  if (lastFile != null) {
+    location.hash = "#" + lastFile;
+  }
 
   app.load();
 });
