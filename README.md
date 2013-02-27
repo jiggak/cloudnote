@@ -24,13 +24,13 @@ for generating HTML from markdown documents.
 	    </Location>
 
 	    # markdown files accessible through WebDAV
-	    Alias /webdav /home/web/slashdev.ca/food/recipes
+	    Alias /webdav /foodie/recipes
 	    <Location /webdav>
 	        DAV On
 
 	        AuthType Basic
 	        AuthName "Recipe WebDAV Login"
-	        AuthUserFile /home/web/slashdev.ca/food/htpasswd
+	        AuthUserFile /foodie/htpasswd
 
 	        Options Indexes
 
