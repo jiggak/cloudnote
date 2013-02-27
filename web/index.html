@@ -5,6 +5,7 @@
     <title>CloudNotes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <script src="js/jquery-1.7.2.min.js"></script>
     <script src="js/jquery.ba-hashchange.js"></script>
@@ -15,12 +16,12 @@
     <script src="js/app.js"></script>
   </head>
   <body>
-    <div class="container-fluid">
+    <div id="container" class="container-fluid">
       <div class="row-fluid">
-        <div class="span2">
+        <div id="navigation" class="span2">
           <ul id="docslist" class="nav nav-pills nav-stacked" />
         </div>
-        <div class="span10">
+        <div id="document" class="span10">
           <div id="docview" class="well"></div>
         </div>
       </div>
