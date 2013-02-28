@@ -1,15 +1,17 @@
-html,body {
-  height: 100%;
-}
+@media (min-width: 980px) {
+  html,body {
+    height: 100%;
+  }
 
-#container {
-  height: 100%;
-}
+  #container {
+    height: 100%;
+  }
 
-#container > div, #container > div > div {
-  height: 100%;
-}
+  #container > div, #container > div > div {
+    height: 100%;
+  }
 
-#navigation, #document {
-  overflow-y: auto;
+  #navigation, #document {
+    overflow-y: auto;
+  }
 }
