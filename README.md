@@ -48,10 +48,8 @@ for generating HTML from markdown documents.
 
 Projects used in this software:
 
+* [AngularJS](http://angularjs.org/)
 * [Bootstrap](http://twitter.github.com/bootstrap/)
-* [jquery 1.7.2](http://jquery.com/)
+* [jquery 1.11.0](http://jquery.com/)
 * [jquery.dav.js](https://github.com/sandro-pasquali/jquery.dav)
-* [jquery.ba-hashchange.js](https://github.com/cowboy/jquery-hashchange)
-* [jquery.jqtemplate.js](http://www.slashdev.ca/jqtemplate/)
 * [markdown.js](https://github.com/evilstreak/markdown-js)
-* [jquery.cookie.js](https://github.com/carhartl/jquery-cookie)
