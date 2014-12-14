@@ -26,12 +26,6 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
         $scope.setCurrent(n);
       }
     });
-
-    $(document).on('click', '.navbar-collapse.in', function(e) {
-      if( $(e.target).is('a') ) {
-        $(this).collapse('hide');
-      }
-    });
   });
 
   $scope.setCurrent = function (note) {
@@ -40,17 +34,19 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
     notes.get(note).then(function (result) {
       $('#content').html(markdown.toHTML(result.data));
 
-      $("#content a").each(function () {
-        var link = $(this).attr("href");
+      $('#content a').each(function () {
+        var link = $(this).attr('href');
 
-        if (link.indexOf("http") == 0) {
+        if (link.indexOf('http') == 0) {
           // open absolute links in new tab/window
-          $(this).attr("target", "_blank");
+          $(this).attr('target', '_blank');
         } else {
           // assume relative links are links to other notes
-          $(this).attr("href", "#/" + link);
+          $(this).attr('href', '#/' + link);
         }
       });
+
+      $('.navbar-collapse.in').collapse('hide');
     });
   }
 });
