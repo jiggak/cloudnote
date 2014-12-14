@@ -21,11 +21,17 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
 
     $scope.notes = result;
 
-    jQuery(result).each(function (i, n) {
+    angular.forEach(result, function (n) {
       if (n.fileName == escape(fileName)) {
         $scope.setCurrent(n);
       }
-    })
+    });
+
+    $(document).on('click', '.navbar-collapse.in', function(e) {
+      if( $(e.target).is('a') ) {
+        $(this).collapse('hide');
+      }
+    });
   });
 
   $scope.setCurrent = function (note) {
