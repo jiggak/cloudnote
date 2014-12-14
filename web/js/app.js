@@ -2,7 +2,7 @@ var WebDAVRoot = '/webdav/';
 
 var notesApp = angular.module('notesApp', ['ngCookies']);
 
-notesApp.controller('NotesAppCtrl', function ($scope, $location, $cookies, Notes) {
+notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
   var fileName = null;
   if ($location.path() == '') {
     if ($cookies.lastfile) {
@@ -13,7 +13,7 @@ notesApp.controller('NotesAppCtrl', function ($scope, $location, $cookies, Notes
     fileName = $location.path().substring(1);
   }
 
-  Notes.list().then(function (result) {
+  notes.list().then(function (result) {
     if (fileName == null) {
       fileName = result[0].fileName;
       $location.path('/' + fileName);
@@ -31,7 +31,7 @@ notesApp.controller('NotesAppCtrl', function ($scope, $location, $cookies, Notes
   $scope.setCurrent = function (note) {
     $scope.current = note;
     $cookies.lastfile = note.fileName;
-    Notes.get(note).then(function (result) {
+    notes.get(note).then(function (result) {
       $('#content').html(markdown.toHTML(result.data));
 
       $("#content a").each(function () {
@@ -49,14 +49,16 @@ notesApp.controller('NotesAppCtrl', function ($scope, $location, $cookies, Notes
   }
 });
 
-function Note (response) {
-  this.filePath = $(response).find('href').text();
-  this.fileName = this.filePath.split('/').pop();
-  this.name = unescape(this.fileName.replace('.md', ''));
-  this.etag = $(response).find('getetag').text();
-}
+notesApp.factory('Note', function () {
+  return function (response) {
+    this.filePath = $(response).find('href').text();
+    this.fileName = this.filePath.split('/').pop();
+    this.name = unescape(this.fileName.replace('.md', ''));
+    this.etag = $(response).find('getetag').text();
+  }
+});
 
-notesApp.factory('Notes', function ($q, $rootScope, $http) {
+notesApp.service('notes', function ($q, $rootScope, $http, Note) {
   return {
     list: function() {
       var deferred = $q.defer();
