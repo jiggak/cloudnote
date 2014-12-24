@@ -19,13 +19,11 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
       $location.path('/' + fileName);
     }
 
-    $scope.notes = result;
+    $scope.notes = _.sortBy(result, 'name');
 
-    angular.forEach(result, function (n) {
-      if (n.fileName == escape(fileName)) {
-        $scope.setCurrent(n);
-      }
-    });
+    $scope.setCurrent(_.find(result, function (f) {
+      return f.fileName == escape(fileName);
+    }));
   });
 
   $scope.setCurrent = function (note) {

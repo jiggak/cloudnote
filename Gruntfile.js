@@ -6,7 +6,8 @@ module.exports = function (grunt) {
     'bootstrap/dist/js/bootstrap.js',
     'bootstrap/dist/css/bootstrap.css',
     'jquery.dav/jquery.dav.js',
-    'markdown/lib/markdown.js'
+    'markdown/lib/markdown.js',
+    'underscore/underscore.js'
   ];
 
   grunt.initConfig({
