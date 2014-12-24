@@ -4,7 +4,7 @@ var notesApp = angular.module('notesApp', ['ngCookies']);
 
 notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
   var fileName = null;
-  if ($location.path() == '') {
+  if ($location.path() === '') {
     if ($cookies.lastfile) {
       fileName = $cookies.lastfile;
       $location.path('/' + fileName);
@@ -14,7 +14,7 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
   }
 
   notes.list().then(function (result) {
-    if (fileName == null) {
+    if (fileName === null) {
       fileName = result[0].fileName;
       $location.path('/' + fileName);
     }
@@ -37,7 +37,7 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
       $('#content a').each(function () {
         var link = $(this).attr('href');
 
-        if (link.indexOf('http') == 0) {
+        if (link.indexOf('http') === 0) {
           // open absolute links in new tab/window
           $(this).attr('target', '_blank');
         } else {
@@ -48,7 +48,7 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
 
       $('.navbar-collapse.in').collapse('hide');
     });
-  }
+  };
 });
 
 notesApp.factory('Note', function () {
@@ -57,7 +57,7 @@ notesApp.factory('Note', function () {
     this.fileName = this.filePath.split('/').pop();
     this.name = unescape(this.fileName.replace('.md', ''));
     this.etag = $(response).find('getetag').text();
-  }
+  };
 });
 
 notesApp.service('notes', function ($q, $rootScope, $http, Note) {
@@ -74,7 +74,7 @@ notesApp.service('notes', function ($q, $rootScope, $http, Note) {
             // first child is properties response of the directory being listed
             // root etag can be used to decide if the directory listing is stale
             // $(value).find('getetag').text();
-            if (index != 0) {
+            if (index !== 0) {
               notes.push(new Note(value));
             }
           });
@@ -91,5 +91,5 @@ notesApp.service('notes', function ($q, $rootScope, $http, Note) {
     get: function(note) {
       return $http.get(note.filePath);
     }
-  }
+  };
 });

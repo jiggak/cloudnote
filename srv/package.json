@@ -1,6 +1,7 @@
 {
-	"dependencies": {
-		"http-proxy": "*",
-		"serve-static": "*"
-	}
+  "dependencies": {
+    "http-proxy": "*",
+    "serve-static": "*",
+    "finalhandler": "*"
+  }
 }
