@@ -39,12 +39,19 @@ module.exports = function (grunt) {
           'dist/js/lib.min.js': 'build/lib/*.js'
         }
       }
+    },
+    watch: {
+      source: {
+        files: 'src/**',
+        tasks: ['default']
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jshint', 'copy']);
   grunt.registerTask('dist', ['jshint', 'copy', 'uglify']);

@@ -5,6 +5,7 @@
     "grunt": "*",
     "grunt-contrib-copy": "^0.7.0",
     "grunt-contrib-jshint": "*",
-    "grunt-contrib-uglify": "*"
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "^0.6.1"
   }
 }
