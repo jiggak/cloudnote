@@ -26,22 +26,6 @@ function ($scope, $location, $cookies, notes) {
   $scope.setCurrent = function (note) {
     $scope.current = note;
     $cookies.lastfile = note.fileName;
-    note.get().then(function (result) {
-      $('#content').html(markdown.toHTML(result.data));
-
-      $('#content a').each(function () {
-        var link = $(this).attr('href');
-
-        if (link.indexOf('http') === 0) {
-          // open absolute links in new tab/window
-          $(this).attr('target', '_blank');
-        } else {
-          // assume relative links are links to other notes
-          $(this).attr('href', '#/' + link);
-        }
-      });
-
-      $('.navbar-collapse.in').collapse('hide');
-    });
+    $('.navbar-collapse.in').collapse('hide');
   };
 }]);

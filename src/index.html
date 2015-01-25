@@ -20,6 +20,7 @@
     <script src="js/ctrl/notes.js"></script>
     <script src="js/factory/Note.js"></script>
     <script src="js/service/notes.js"></script>
+    <script src="js/directive/markdown.js"></script>
   </head>
   <body ng-controller="NotesCtrl">
     <div class="container-fluid">
@@ -52,7 +53,9 @@
 
         </div><!-- /col-sm-3 -->
 
-        <div class="col-sm-9" id="content"></div>
+        <div class="col-sm-9">
+          <markdown src="current.filePath" />
+        </div>
       </div><!--/row-->
     </div><!--/.container-->
   </body>
