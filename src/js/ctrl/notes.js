@@ -1,4 +1,5 @@
-notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
+notesApp.controller('NotesCtrl', ['$scope', '$location', '$cookies', 'notes',
+function ($scope, $location, $cookies, notes) {
   var fileName = null;
   if ($location.path() === '') {
     if ($cookies.lastfile) {
@@ -43,4 +44,4 @@ notesApp.controller('NotesCtrl', function ($scope, $location, $cookies, notes) {
       $('.navbar-collapse.in').collapse('hide');
     });
   };
-});
+}]);

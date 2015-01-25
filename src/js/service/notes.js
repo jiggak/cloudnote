@@ -1,4 +1,5 @@
-notesApp.service('notes', function ($q, $rootScope, $http, root,  Note) {
+notesApp.service('notes', ['$q', '$rootScope', '$http', 'root', 'Note',
+function ($q, $rootScope, $http, root, Note) {
   return {
     list: function() {
       var deferred = $q.defer();
@@ -24,4 +25,4 @@ notesApp.service('notes', function ($q, $rootScope, $http, root,  Note) {
       return deferred.promise;
     }
   };
-});
+}]);

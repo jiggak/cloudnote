@@ -1,4 +1,4 @@
-notesApp.factory('Note', function ($http) {
+notesApp.factory('Note', ['$http', function ($http) {
   function Note(response) {
     this.filePath = $(response).find('D\\:href, href').text();
     this.fileName = unescape(this.filePath.split('/').pop());
@@ -11,4 +11,4 @@ notesApp.factory('Note', function ($http) {
   };
 
   return Note;
-});
+}]);
