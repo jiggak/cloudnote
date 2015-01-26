@@ -1,6 +1,7 @@
 module.exports = function (grunt) {
   var libs = [
     'angular/angular.js',
+    'angular-route/angular-route.js',
     'angular-cookies/angular-cookies.js',
     'jquery/dist/jquery.js',
     'bootstrap/dist/js/bootstrap.js',
