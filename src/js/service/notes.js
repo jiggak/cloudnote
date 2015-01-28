@@ -36,7 +36,34 @@ function ($q, $rootScope, $cookies, $http, root, Note) {
       return deferred.promise;
     },
 
-    list: function () {
+    list: function (searchTerms) {
+      if (searchTerms) {
+        searchTerms = searchTerms.toLowerCase();
+
+        var terms = _.filter(searchTerms.split(' '), function (s) {
+          return s !== "";
+        });
+
+        if (terms.length > 0) {
+          var match = _.find(locals.notes, function (note) {
+            var name = note.name.toLowerCase();
+
+            if (terms.length == 1) {
+              return name.indexOf(terms[0]) >= 0;
+            } else {
+              var names = _.first(name.split(' '), terms.length);
+              return _.every(names, function (n, i) {
+                return n.indexOf(terms[i]) >= 0;
+              });
+            }
+          });
+
+          if (match) {
+            self.current(match);
+          }
+        }
+      }
+
       return locals.notes;
     },
 

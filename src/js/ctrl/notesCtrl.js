@@ -4,8 +4,8 @@ function ($scope, $route, $routeParams, notes) {
     notes.current($routeParams.fileName);
   }
 
-  $scope.notes = function () {
-    return notes.list();
+  $scope.notes = function (searchTerms) {
+    return notes.list(searchTerms);
   };
 
   $scope.current = function (note) {
