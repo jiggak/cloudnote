@@ -1,5 +1,5 @@
-notesApp.controller('NotesCtrl', ['$scope', '$route', '$routeParams', 'notes',
-function ($scope, $route, $routeParams, notes) {
+notesApp.controller('NotesCtrl', ['$scope', '$routeParams', '$location', 'notes',
+function ($scope, $routeParams, $location, notes) {
   if ($routeParams.fileName) {
     notes.current($routeParams.fileName);
   }
@@ -8,7 +8,9 @@ function ($scope, $route, $routeParams, notes) {
     return notes.list(searchTerms);
   };
 
-  $scope.current = function (note) {
-    return notes.current(note);
-  };
+  $scope.current = notes.current;
+
+  $scope.$watch('current()', function (note) {
+    $location.path(note.fileName, false);
+  });
 }]);
