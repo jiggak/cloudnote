@@ -10,18 +10,31 @@ body {
   cursor: pointer;
 }
 
+@media (max-width: 768px) {
+  .navbar-brand {
+    float: none;
+    margin-right: 62px;
+  }
+}
+
 @media (min-width: 768px) {
+  .navbar-header, .navbar-brand {
+    float: none;
+  }
+
   .navbar .navbar-collapse {
     padding: 0;
   }
+
   .navbar ul {
     float: none;
-    margin-top: 50px;
   }
+
   .navbar li {
     float: none;
     display: block;
   }
+
   .navbar li a {
     padding-top: 1em;
     padding-bottom: 1em;
