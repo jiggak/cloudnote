@@ -12,5 +12,6 @@ function ($scope, $routeParams, $location, notes) {
 
   $scope.$watch('current()', function (note) {
     $location.path(note.fileName, false);
+    $('.navbar-collapse.in').collapse('hide');
   });
 }]);
