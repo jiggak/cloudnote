@@ -1,10 +1,10 @@
 module.exports = function (grunt) {
   var libs = [
     'angular/angular.js',
+    'angular-route/angular-route.js',
     'angular-cookies/angular-cookies.js',
     'jquery/dist/jquery.js',
     'bootstrap/dist/js/bootstrap.js',
-    'bootstrap/dist/css/bootstrap.css',
     'jquery.dav/jquery.dav.js',
     'markdown/lib/markdown.js',
     'underscore/underscore.js'
@@ -15,7 +15,7 @@ module.exports = function (grunt) {
       files: ['src/js/**/*.js']
     },
     copy: {
-      main: {
+      build: {
         files: [
           {
             cwd: 'bower_components/',
@@ -29,15 +29,41 @@ module.exports = function (grunt) {
             expand: true,
             src: '**',
             dest: 'build/'
+          },
+          {
+            src: 'bower_components/bootstrap/dist/css/bootstrap.css',
+            dest: 'build/css/bootstrap.css'
+          }
+        ]
+      },
+      dist: {
+        files: [
+          {
+            cwd: 'src/',
+            expand: true,
+            src: ['**', '!**/*.js'],
+            dest: 'dist/',
+            filter: 'isFile'
+          },
+          {
+            src: 'bower_components/bootstrap/dist/css/bootstrap.min.css',
+            dest: 'dist/css/bootstrap.min.css'
           }
         ]
       }
     },
     uglify: {
       dist: {
-        files: {
-          'dist/js/lib.min.js': 'build/lib/*.js'
-        }
+        files: [
+          {
+            src: libs.map(function (f) { return 'bower_components/' + f; }),
+            dest: 'dist/js/lib.min.js'
+          },
+          {
+            src: ['build/js/main.js', 'build/js/**/*.js'],
+            dest: 'dist/js/app.min.js'
+          }
+        ]
       }
     },
     watch: {
@@ -53,6 +79,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'copy']);
-  grunt.registerTask('dist', ['jshint', 'copy', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'copy:build']);
+  grunt.registerTask('dist', ['jshint', 'copy:build', 'uglify', 'copy:dist']);
 };
