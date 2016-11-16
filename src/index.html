@@ -5,37 +5,8 @@
     <title>CloudNotes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body ng-controller="NotesController as notes">
-    <div class="container-fluid">
-
-      <div class="row">
-
-        <div class="col-sm-3">
-          <div class="sidebar-nav">
-            <div class="navbar navbar-default" role="navigation">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <span class="visible-xs navbar-brand">Recipes</span>
-              </div>
-              <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                <ul class="nav navbar-nav">
-                  <li ng-repeat="note in notes.list" ng-class="{active: note == notes.current}">
-                    <a href="#{{note.fileName}}" ng-click="notes.current = note">{{note.name}}</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-9" id="content">
-        </div>
-      </div><!--/row-->
+  <body>
+    <div class="container-fluid" ng-view>
     </div><!--/.container-->
   </body>
 </html>

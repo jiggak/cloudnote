@@ -1,9 +1,10 @@
 var webpack = require('webpack'),
-   HtmlWebpackPlugin = require('html-webpack-plugin');
+   HtmlWebpackPlugin = require('html-webpack-plugin'),
+   WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
    entry: {
-      app: './src/index.ts',
+      app: './src/main.ts',
       vendor: './src/vendor.ts'
    },
    output: {
@@ -39,11 +40,11 @@ module.exports = {
          {
             test: /\.ts$/,
             loader: 'ts'
-         }/*,
+         },
          {
             test: /\.html$/,
             loader: 'html'
-         }*/
+         }
       ]
    },
    plugins: [
@@ -52,6 +53,7 @@ module.exports = {
       }),
       new HtmlWebpackPlugin({
          template: 'src/index.html'
-      })
+      }),
+      new WebpackNotifierPlugin()
    ]
 };

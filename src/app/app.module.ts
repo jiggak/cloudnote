@@ -1,10 +1,9 @@
 import { module } from 'angular';
-import { NotesController } from './notes.controller';
-import { NotesService } from './notes.service';
 
-const app = module('notesApp', ['ngCookies']);
-
-app.controller('NotesController', NotesController);
-app.service('NotesService', NotesService);
-
+// create main app module
+const app = module('notesApp', ['ngCookies', 'ngRoute']);
 export default app;
+
+// "sub-modules"
+import './notes';
+import './markdown.directive';
