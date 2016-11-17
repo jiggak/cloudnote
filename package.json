@@ -24,8 +24,9 @@
     "underscore": "^1.8.3"
   },
   "scripts": {
+    "postinstall": "typings i",
+    "start": "webpack-dev-server --content-base build/",
     "typings": "typings",
-    "webpack": "webpack",
-    "server": "webpack-dev-server --content-base build/"
+    "webpack": "webpack"
   }
 }

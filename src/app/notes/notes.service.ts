@@ -65,35 +65,39 @@ export class NotesService {
       });
    }
 
-   list(search?:string):INote[] {
-      if (search) {
-         search = search.toLowerCase();
+   get list():INote[] {
+      return this._notes;
+   }
 
-         let terms = _.filter(search.split(' '), function (s) {
-            return s !== '';
-         });
-
-         if (terms.length > 0) {
-            let match = _.find(this._notes, function (note) {
-               let name = note.name.toLowerCase();
-
-               if (terms.length == 1) {
-                  return name.indexOf(terms[0]) >= 0;
-               } else {
-                  let names = _.first(name.split(' '), terms.length);
-                  return _.every(names, function (n, i) {
-                     return n.indexOf(terms[i]) >= 0;
-                  });
-               }
-            });
-
-            if (match) {
-               this.current = match;
-            }
-         }
+   setCurrentBySearch(search:string) {
+      if (!search) {
+         return;
       }
 
-      return this._notes;
+      search = search.toLowerCase();
+
+      let terms = _.filter(search.split(' '), function (s) {
+         return s !== '';
+      });
+
+      if (terms.length > 0) {
+         let match = _.find(this._notes, function (note) {
+            let name = note.name.toLowerCase();
+
+            if (terms.length == 1) {
+               return name.indexOf(terms[0]) >= 0;
+            } else {
+               let names = _.first(name.split(' '), terms.length);
+               return _.every(names, function (n, i) {
+                  return n.indexOf(terms[i]) >= 0;
+               });
+            }
+         });
+
+         if (match) {
+            this.current = match;
+         }
+      }
    }
 
    setCurrentByFileName(fileName:string) {

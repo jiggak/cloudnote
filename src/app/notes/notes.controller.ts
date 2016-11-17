@@ -3,8 +3,6 @@ import {NotesService, INote} from './notes.service'; NotesService;
 export class NotesController {
    static $inject:string[] = ['$routeParams', '$location', 'loadedNotesService'];
 
-   search:string;
-
    constructor(
       private $routeParams:ng.route.IRouteParamsService,
       private $location:ng.ILocationService,
@@ -16,12 +14,16 @@ export class NotesController {
       } else if (service.lastFile) {
          $location.path(service.lastFile);
       } else {
-         $location.path(service.list()[0].fileName);
+         $location.path(service.list[0].fileName);
       }
    }
 
-   list(search:string):INote[] {
-      return this.service.list(search);
+   search(search:string) {
+      this.service.setCurrentBySearch(search);
+   }
+
+   get list():INote[] {
+      return this.service.list;
    }
 
    get current():INote {
