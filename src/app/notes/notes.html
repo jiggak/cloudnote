@@ -20,7 +20,6 @@
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li ng-repeat="note in notes.list" ng-class="{active: note == notes.current}">
-            <!--<a ng-click="notes.current = note">{{note.name}}</a>-->
             <a href="#{{note.fileName}}">{{note.name}}</a>
           </li>
         </ul>

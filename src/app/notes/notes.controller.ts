@@ -29,10 +29,6 @@ export class NotesController {
    get current():INote {
       return this.service.current;
    }
-
-   set current(note:INote) {
-      this.service.current = note;
-   }
 }
 
 notesServiceLoader.$inject = ['NotesService'];
