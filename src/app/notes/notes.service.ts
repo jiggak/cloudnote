@@ -25,17 +25,22 @@ class Note implements INote {
 }
 
 export class NotesService {
-   static $inject:string[] = ['$http', '$cookies'];
+   static $inject:string[] = ['$http', '$q', '$cookies'];
 
    private _current:INote;
    private _notes:INote[];
 
    constructor (
       private $http: ng.IHttpService,
+      private $q: ng.IQService,
       private $cookies: ng.cookies.ICookiesService)
    { }
 
    load(): ng.IPromise<NotesService> {
+      if (this._notes != null) {
+         return this.$q.resolve(this);
+      }
+
       let options = {
          url: '/webdav/',
          method: 'PROPFIND',
