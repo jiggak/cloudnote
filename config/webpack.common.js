@@ -43,6 +43,11 @@ module.exports = {
       }),
       new HtmlWebpackPlugin({
          template: 'src/index.html'
+      }),
+      // bootstrap complains 'jQuery not defined' without this
+      new webpack.ProvidePlugin({
+         $: 'jquery',
+         jQuery: 'jquery'
       })
    ]
 };

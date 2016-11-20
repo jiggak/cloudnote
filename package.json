@@ -21,6 +21,7 @@
     "angular-cookies": "^1.5.8",
     "angular-route": "^1.5.8",
     "bootstrap": "^3.3.7",
+    "jquery": "^3.1.1",
     "marked": "^0.3.6",
     "underscore": "^1.8.3"
   },
@@ -28,6 +29,7 @@
     "postinstall": "typings i",
     "start": "webpack-dev-server --content-base build/",
     "typings": "typings",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "release": "webpack --config config/webpack.release.js"
   }
 }
