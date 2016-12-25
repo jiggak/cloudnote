@@ -53,14 +53,21 @@ export class NotesService {
          let parser = new DOMParser();
          let doc = parser.parseFromString(response.data as string, 'application/xml');
 
-         this._notes = _.chain(element(doc).find('response'))
+         // some browsers need namespace qualification, others don't
+         // try and query without the namespace, add it if query was empty
+         let ns = '';
+         if (element(doc).find('response').length == 0) {
+            ns = 'D\:';
+         }
+
+         this._notes = _.chain(element(doc).find(`${ns}response`))
             // first child is properties response of the directory being listed
             // root etag can be used to decide if the directory listing is stale
             // $(value).find('getetag').text();
             .rest(1)
             .map((node) => {
-               let filePath = element(node).find('href').text();
-               let etag = element(node).find('getetag').text();
+               let filePath = element(node).find(`${ns}href`).text();
+               let etag = element(node).find(`${ns}getetag`).text();
                return new Note(filePath, etag);
             })
             .sortBy('name')
