@@ -113,7 +113,10 @@ export class NotesService {
    }
 
    setCurrentByFileName(fileName:string) {
-      this.current = _.findWhere(this._notes, {fileName: fileName});
+      let current = _.findWhere(this._notes, {fileName: fileName});
+      if (current) {
+         this.current = current;
+      }
    }
 
    get current():INote {
