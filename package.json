@@ -2,14 +2,19 @@
   "name": "cloudnote",
   "version": "0.0.1",
   "devDependencies": {
+    "@types/angular": "^1.6.32",
+    "@types/angular-cookies": "^1.4.5",
+    "@types/angular-route": "^1.3.4",
+    "@types/jquery": "^2.0.47",
+    "@types/marked": "^0.3.0",
+    "@types/underscore": "^1.8.2",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.24.1",
     "style-loader": "^0.13.1",
     "ts-loader": "^1.0.0",
-    "typescript": "^2.0.8",
-    "typings": "^1.5.0",
+    "typescript": "^2.5.2",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2",
@@ -26,9 +31,7 @@
     "underscore": "^1.8.3"
   },
   "scripts": {
-    "postinstall": "typings i",
     "start": "webpack-dev-server --content-base build/",
-    "typings": "typings",
     "webpack": "webpack",
     "release": "webpack --config config/webpack.release.js"
   }
