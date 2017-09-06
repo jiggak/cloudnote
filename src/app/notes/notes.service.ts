@@ -28,7 +28,8 @@ export class NotesService {
    static $inject:string[] = ['$http', '$q', '$cookies'];
 
    private _current:INote;
-   private _notes:INote[];
+   private notes:INote[];
+   private filtered:INote[];
 
    constructor (
       private $http: ng.IHttpService,
@@ -37,7 +38,7 @@ export class NotesService {
    { }
 
    load(): ng.IPromise<NotesService> {
-      if (this._notes != null) {
+      if (this.notes != null) {
          return this.$q.resolve(this);
       }
 
@@ -60,7 +61,7 @@ export class NotesService {
             ns = 'D\:';
          }
 
-         this._notes = _.chain(element(doc).find(`${ns}response`))
+         this.notes = _.chain(element(doc).find(`${ns}response`))
             // first child is properties response of the directory being listed
             // root etag can be used to decide if the directory listing is stale
             // $(value).find('getetag').text();
@@ -78,22 +79,23 @@ export class NotesService {
    }
 
    get list():INote[] {
-      return this._notes;
+      return this.filtered != null ? this.filtered : this.notes;
    }
 
-   setCurrentBySearch(search:string) {
+   search(search:string) {
       if (!search) {
+         this.filtered = null;
          return;
       }
 
       search = search.toLowerCase();
 
-      let terms = _.filter(search.split(' '), function (s) {
+      let terms = _.filter(search.split(' '), (s) => {
          return s !== '';
       });
 
       if (terms.length > 0) {
-         let match = _.find(this._notes, function (note) {
+         this.filtered = _.filter(this.notes, (note) => {
             let name = note.name.toLowerCase();
 
             if (terms.length == 1) {
@@ -106,14 +108,14 @@ export class NotesService {
             }
          });
 
-         if (match) {
-            this.current = match;
+         if (this.filtered.length > 0) {
+            this.current = this.filtered[0];
          }
       }
    }
 
    setCurrentByFileName(fileName:string) {
-      let current = _.findWhere(this._notes, {fileName: fileName});
+      let current = _.findWhere(this.notes, {fileName: fileName});
       if (current) {
          this.current = current;
       }

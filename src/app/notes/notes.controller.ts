@@ -19,7 +19,7 @@ export class NotesController {
    }
 
    search(search:string) {
-      this.service.setCurrentBySearch(search);
+      this.service.search(search);
    }
 
    get list():INote[] {
