@@ -1,6 +1,7 @@
-import { bootstrap } from 'angular';
-import app from './app/app.module';
+// angular polyfills
+import 'zone.js/dist/zone.js';
 
-import './main.css';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AppModule } from './app/app.module';
 
-bootstrap(document.body, [app.name], { strictDi: true });
+platformBrowserDynamic().bootstrapModule(AppModule);

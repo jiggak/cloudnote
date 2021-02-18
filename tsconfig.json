@@ -1,9 +1,13 @@
-
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true
-  }
+   "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "lib": ["es2015", "dom"],
+      // FIXME this shouldn't be necessary, what gives?
+      "skipLibCheck": true
+   }
 }

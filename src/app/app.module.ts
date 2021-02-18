@@ -1,9 +1,21 @@
-import { module } from 'angular';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
 
-// create main app module
-const app = module('notesApp', ['ngCookies', 'ngRoute']);
-export default app;
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from './app.component';
+import { NotesComponent } from "./notes/notes.component";
 
-// "sub-modules"
-import './notes';
-import './markdown.directive';
+@NgModule({
+   bootstrap: [AppComponent],
+   imports: [
+      BrowserModule,
+      CommonModule,
+      AppRoutingModule
+   ],
+   declarations: [
+      AppComponent,
+      NotesComponent
+   ],
+})
+export class AppModule { }

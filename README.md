@@ -43,13 +43,3 @@ for generating HTML from markdown documents.
 	        </LimitExcept>
 	    </Location>
 	</VirtualHost>
-
-## Third Party Bits
-
-Projects used in this software:
-
-* [AngularJS](http://angularjs.org/)
-* [Bootstrap](http://twitter.github.com/bootstrap/)
-* [jquery 1.11.0](http://jquery.com/)
-* [jquery.dav.js](https://github.com/sandro-pasquali/jquery.dav)
-* [markdown.js](https://github.com/evilstreak/markdown-js)
