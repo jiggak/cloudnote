@@ -26,6 +26,20 @@ module.exports = {
          {
             test: /\.html$/,
             loader: 'html-loader',
+         },
+         {
+            test: /\.scss$/,
+            use: [
+               { loader: 'style-loader' },
+               { loader: 'css-loader' },
+               {
+                  loader: 'postcss-loader',
+                  options: {
+                     postcssOptions: { plugins: ['autoprefixer'] }
+                  }
+               },
+               { loader: 'sass-loader' }
+            ]
          }
       ]
    },

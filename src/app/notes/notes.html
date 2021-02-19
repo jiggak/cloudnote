@@ -1,5 +1,27 @@
-<ul>
-   <li *ngFor="let note of notes">
-      {{note.title}}
-   </li>
-</ul>
+<div class="row">
+   <div class="col-auto">
+      <nav class="navbar navbar-dark bg-dark flex-column">
+         <form class="form-inline">
+            <input type="text" class="form-control" placeholder="Search">
+            <button class="navbar-toggler" type="button">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+         </form>
+
+         <div class="navbar-collapse navbar-nav-scroll">
+            <div class="list-group">
+               <a class="list-group-item list-group-item-action"
+                  [ngClass]="{active: note.filePath == currentFile}"
+                  [routerLink]="[note.filePath]"
+                  *ngFor="let note of notes">
+
+                  {{note.title}}
+               </a>
+            </div>
+         </div>
+      </nav>
+   </div>
+   <div class="col">
+      <h1>Recipe goes here</h1>
+   </div>
+</div>
