@@ -14,7 +14,11 @@ export class NotesComponent implements OnInit {
    ) { }
 
    notes:INote[];
-   currentFile:string;
+   activeFile:string;
+
+   get markdownUrl() {
+      return `/webdav${this.activeFile}`;
+   }
 
    ngOnInit() {
       this.service.list().pipe(toArray()).subscribe(notes => {
@@ -22,7 +26,7 @@ export class NotesComponent implements OnInit {
       });
 
       this.route.paramMap.subscribe(x => {
-         this.currentFile = '/' + x.get('file');
+         this.activeFile = '/' + x.get('file');
       });
    }
 }
