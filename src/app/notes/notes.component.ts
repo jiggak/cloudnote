@@ -5,7 +5,8 @@ import { toArray } from "rxjs/operators";
 import { INote, NotesService } from "./notes.service";
 
 @Component({
-   templateUrl: './notes.html'
+   templateUrl: './notes.html',
+   styleUrls: ['./notes.scss']
 })
 export class NotesComponent implements OnInit {
    constructor(

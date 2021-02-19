@@ -1,3 +1,4 @@
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
@@ -29,6 +30,7 @@ module.exports = {
          },
          {
             test: /\.scss$/,
+            exclude: [ path.join(__dirname, 'src/app') ],
             use: [
                { loader: 'style-loader' },
                { loader: 'css-loader' },
@@ -38,6 +40,16 @@ module.exports = {
                      postcssOptions: { plugins: ['autoprefixer'] }
                   }
                },
+               { loader: 'sass-loader' }
+            ]
+         },
+         {
+            test: /\.scss$/,
+            include: [ path.join(__dirname, 'src/app') ],
+            use: [
+               { loader: 'raw-loader' },
+               { loader: 'extract-loader' },
+               { loader: 'css-loader' },
                { loader: 'sass-loader' }
             ]
          }

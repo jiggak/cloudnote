@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { from } from "rxjs";
-import { map, mergeMap, concatAll } from "rxjs/operators";
+import { map, concatAll } from "rxjs/operators";
 
 import { createClient, FileStat, WebDAVClient } from 'webdav';
 
@@ -19,6 +19,7 @@ export class NotesService {
 
    list() {
       return from(this.client.getDirectoryContents('/') as Promise<FileStat[]>)
+         .pipe(map(list => list.sort(sortFile)))
          .pipe(concatAll(), map(toNote));
 
       function toNote(file:FileStat):INote {
@@ -26,6 +27,16 @@ export class NotesService {
             filePath: file.filename,
             title: file.basename.replace('.md', '')
          };
+      }
+
+      function sortFile(a:FileStat, b:FileStat) {
+         if (a.basename > b.basename) {
+            return 1;
+         } else if (a.basename < b.basename) {
+            return -1;
+         } else {
+            return 0;
+         }
       }
    }
 }
