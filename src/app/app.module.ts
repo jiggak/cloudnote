@@ -8,6 +8,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { NotesComponent } from "./notes/notes.component";
+import { SearchPipe } from "./notes/search.pipe";
 
 @NgModule({
    bootstrap: [AppComponent],
@@ -22,7 +23,8 @@ import { NotesComponent } from "./notes/notes.component";
    ],
    declarations: [
       AppComponent,
-      NotesComponent
+      NotesComponent,
+      SearchPipe
    ],
 })
 export class AppModule { }
