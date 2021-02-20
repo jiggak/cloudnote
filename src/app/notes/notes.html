@@ -1,23 +1,22 @@
 <div class="row">
    <div class="col-md-auto col-sm px-0">
-      <nav class="navbar navbar-dark bg-dark flex-column">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-column">
          <form class="form-inline">
             <input type="text" class="form-control" placeholder="Search">
-            <button class="navbar-toggler d-md-none" type="button">
+            <button class="navbar-toggler d-md-none" type="button" (click)="showNav = !showNav">
                <span class="navbar-toggler-icon"></span>
             </button>
          </form>
 
-         <div class="navbar-collapse">
-            <div class="list-group">
-               <a class="list-group-item list-group-item-action"
-                  [ngClass]="{active: note.filePath == activeFile}"
-                  [routerLink]="[note.filePath]"
-                  *ngFor="let note of notes">
+         <div class="navbar-collapse collapse list-group" [ngClass]="{show: showNav}">
+            <a class="list-group-item list-group-item-action"
+               [ngClass]="{active: note.filePath == activeFile}"
+               [routerLink]="[note.filePath]"
+               (click)="onSelect()"
+               *ngFor="let note of notes">
 
-                  {{note.title}}
-               </a>
-            </div>
+               {{note.title}}
+            </a>
          </div>
       </nav>
    </div>

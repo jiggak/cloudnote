@@ -16,6 +16,7 @@ export class NotesComponent implements OnInit {
 
    notes:INote[];
    activeFile:string;
+   showNav = false;
 
    get markdownUrl() {
       return `/webdav${this.activeFile}`;
@@ -29,5 +30,9 @@ export class NotesComponent implements OnInit {
       this.route.paramMap.subscribe(x => {
          this.activeFile = '/' + x.get('file');
       });
+   }
+
+   onSelect() {
+      this.showNav = false;
    }
 }
