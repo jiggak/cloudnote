@@ -1,0 +1,26 @@
+<div class="row">
+   <div class="col-md-auto col-sm px-0">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark flex-column">
+         <form class="form-inline">
+            <input type="text" class="form-control" placeholder="Search" #search (input)="onSearch(search.value)">
+            <button class="navbar-toggler d-md-none" type="button" (click)="showNav = !showNav">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+         </form>
+
+         <div class="navbar-collapse collapse list-group" [ngClass]="{show: showNav}">
+            <a class="list-group-item list-group-item-action"
+               *ngFor="let note of notes"
+               [ngClass]="{active: note.filePath == activeFile}"
+               [routerLink]="[note.filePath]"
+               (click)="onSelect()">
+
+               {{note.title}}
+            </a>
+         </div>
+      </nav>
+   </div>
+   <div class="col content">
+      <router-outlet></router-outlet>
+   </div>
+</div>
