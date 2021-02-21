@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { NoteContentComponent } from './notes/note-content.component';
 import { NotesListComponent } from './notes/notes-list.component';
 import { NotesComponent } from './notes/notes.component';
-import { SearchPipe } from './notes/search.pipe';
 
 @NgModule({
    bootstrap: [AppComponent],
@@ -27,8 +26,7 @@ import { SearchPipe } from './notes/search.pipe';
       AppComponent,
       NotesComponent,
       NotesListComponent,
-      NoteContentComponent,
-      SearchPipe
+      NoteContentComponent
    ],
 })
 export class AppModule { }

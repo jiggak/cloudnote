@@ -13,7 +13,9 @@ export class NotesListComponent implements OnInit {
       private router:Router
    ) { }
 
+   private _notes:INote[];
    notes:INote[];
+
    activeFile:string;
    showNav = false;
 
@@ -23,9 +25,10 @@ export class NotesListComponent implements OnInit {
       });
    }
 
-   initNotes(notes:INote[]) {
-      this.notes = notes;
+   private initNotes(notes:INote[]) {
+      this._notes = this.notes = notes;
 
+      // navigated to route without file param
       if (!this.route.firstChild) {
          this.router.navigate([notes[0].filePath]).then(() => {
             this.initNotes(notes);
@@ -34,6 +37,18 @@ export class NotesListComponent implements OnInit {
          this.route.firstChild.paramMap.subscribe(x => {
             this.activeFile = '/' + x.get('file');
          });
+      }
+   }
+
+   onSearch(search:string) {
+      if (search && search != '') {
+         search = search.toLowerCase();
+         this.notes = this._notes.filter(note => note.title.toLowerCase().indexOf(search) >= 0);
+         if (this.notes.length > 0) {
+            this.router.navigate([this.notes[0].filePath]);
+         }
+      } else {
+         this.notes = this._notes;
       }
    }
 
