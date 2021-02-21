@@ -6,6 +6,15 @@ module.exports = {
    entry: {
       app: './src/main.ts'
    },
+   output: {
+      path: path.resolve(__dirname, 'dist'),
+      filename: '[name].[hash].js'
+   },
+   optimization: {
+      splitChunks: {
+         chunks: 'all'
+      }
+   },
    resolve: {
       extensions: ['.ts', '.js']
    },

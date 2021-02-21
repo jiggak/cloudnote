@@ -2,7 +2,9 @@
   "name": "cloudnote",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack-dev-server --mode development --devtool inline-source-map"
+    "start": "webpack-dev-server --mode development --devtool inline-source-map",
+    "build": "rm -rf dist && webpack --mode production",
+    "deploy": "npm run build && scp dist/* ninja:/home/web/slashdev.ca/food/htdocs"
   },
   "dependencies": {
     "@angular/common": "^11.2.0",
