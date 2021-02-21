@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { INote } from './notes.service';
 
@@ -9,7 +9,8 @@ import { INote } from './notes.service';
 })
 export class NotesListComponent implements OnInit {
    constructor(
-      private route:ActivatedRoute
+      private route:ActivatedRoute,
+      private router:Router
    ) { }
 
    notes:INote[];
@@ -18,12 +19,22 @@ export class NotesListComponent implements OnInit {
 
    ngOnInit() {
       this.route.data.subscribe(data => {
-         this.notes = data.notes;
+         this.initNotes(data.notes);
       });
+   }
 
-      this.route.firstChild.paramMap.subscribe(x => {
-         this.activeFile = '/' + x.get('file');
-      });
+   initNotes(notes:INote[]) {
+      this.notes = notes;
+
+      if (!this.route.firstChild) {
+         this.router.navigate([notes[0].filePath]).then(() => {
+            this.initNotes(notes);
+         });
+      } else {
+         this.route.firstChild.paramMap.subscribe(x => {
+            this.activeFile = '/' + x.get('file');
+         });
+      }
    }
 
    onSelect() {
