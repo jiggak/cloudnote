@@ -1,38 +1,6 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { toArray } from "rxjs/operators";
-
-import { INote, NotesService } from "./notes.service";
+import { Component } from '@angular/core';
 
 @Component({
-   templateUrl: './notes.html',
-   styleUrls: ['./notes.scss']
+   template: '<router-outlet></router-outlet>'
 })
-export class NotesComponent implements OnInit {
-   constructor(
-      private service:NotesService,
-      private route:ActivatedRoute
-   ) { }
-
-   notes:INote[];
-   activeFile:string;
-   showNav = false;
-
-   get markdownUrl() {
-      return `/webdav${this.activeFile}`;
-   }
-
-   ngOnInit() {
-      this.service.list().pipe(toArray()).subscribe(notes => {
-         this.notes = notes;
-      });
-
-      this.route.paramMap.subscribe(x => {
-         this.activeFile = '/' + x.get('file');
-      });
-   }
-
-   onSelect() {
-      this.showNav = false;
-   }
-}
+export class NotesComponent { }

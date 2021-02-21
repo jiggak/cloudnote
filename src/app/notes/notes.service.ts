@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { from } from "rxjs";
-import { map, concatAll } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { createClient, FileStat, WebDAVClient } from 'webdav';
 
@@ -9,7 +9,7 @@ export interface INote {
    title:string;
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class NotesService {
    readonly client:WebDAVClient;
 
@@ -17,10 +17,9 @@ export class NotesService {
       this.client = createClient('/webdav');
    }
 
-   list() {
+   list():Observable<INote[]> {
       return from(this.client.getDirectoryContents('/') as Promise<FileStat[]>)
-         .pipe(map(list => list.sort(sortFile)))
-         .pipe(concatAll(), map(toNote));
+         .pipe(map(list => list.sort(sortFile).map(toNote)));
 
       function toNote(file:FileStat):INote {
          return {

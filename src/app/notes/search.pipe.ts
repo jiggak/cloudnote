@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform } from "@angular/core";
-import { INote } from "./notes.service";
+import { Pipe, PipeTransform } from '@angular/core';
+import { INote } from './notes.service';
 
 @Pipe({
    name: 'search'
